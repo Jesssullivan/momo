@@ -17,7 +17,6 @@ sudo adduser $USER dialout
 sudo chmod a+rw /dev/ttyACM0
 ```
     
-intellij
 *Regarding cmake, intellij, etc-
 the standard arduino executable + gui is still preferred for actually uploading to arduino hardware*
     
