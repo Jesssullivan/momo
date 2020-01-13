@@ -2,6 +2,7 @@
 # @ https://github.com/jesssullivan
 
 
+
 def eval_range(val, rmax=1024, rmin=0):
 
     val = (val - rmin) * (1024 / rmax)
@@ -12,9 +13,10 @@ def eval_range(val, rmax=1024, rmin=0):
             return 'Throttle', 254
         else:
             return 'Throttle', int(val*2)
+
     else:
         val = (val / 4) - 127
-        return 'Brake', -val*2
+        return 'Brake', int(-val*2)
 
 
 # default values:
