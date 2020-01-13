@@ -45,4 +45,3 @@ wget https://raw.githubusercontent.com/omnidan/ArduinoPure/master/arduino/USBAPI
 ``` shell script
 avr-objcopy -j .text -j .data -O ihex my_project.elf my_project.hex
 ```     
-    
