@@ -1,9 +1,21 @@
+/****************************************************************
+ * Split potentiometer Brake / Throttle controller w/ Arduino Leonardo
+ * 
+ * a WIP by for the D&M Makerspace @ https://github.com/jesssullivan
+ * 
+ * joystick library (rewrap of pluggableusb) available here:
+ * https://github.com/MHeironimus/ArduinoJoystickLibrary
+
+ // * TODO:
+        * what is the preferred interface for limit reset?
+        * what are other I/O and hardware will be needed?
+
+ // TODO: merge pluggableusb depends
+*****************************************************************/
 
 #include <Joystick.h> 
-
-
-
 int logs = 1;  // use Serial monitor?
+
 
 // pinout:
 int dual = 0;  // potentiometer pin
