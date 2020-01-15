@@ -21,7 +21,6 @@
 
 *****************************************************************/
 
-
 #include <EEPROM.h>  // using leonardo only for now (attiny, etc later)
 #include <Joystick.h>
 

@@ -1,12 +1,47 @@
 # MOMO:
 
 *A Simple Brake / Throttle controller w/ Arduino Leonardo- D&M WIP by Jess Sullivan*
+   
+   
+# Quickstart:       
     
-***extra bits regarding cmake & compilation:***     
+For more introductions and notes on Open Source collaboration with the D&M Makerspace, visit:       
+- [Some {development} software notes here](https://github.com/PSU-HC/home-wiki/wiki/Developer-Student-Software)
+- [Some {rapid fabrication} software notes here](https://github.com/PSU-HC/home-wiki/wiki/CAD-CAM-Student-Software)
+- [...Or the D&M Makerspace Home Page over here](https://makerspace.plymouthcreate.net/)
+
+    
+       
+```shell script
+# clone this repo:
+git clone https://github.com/jesssullivan/momo 
+
+# get updated joystick library:
+git clone https://github.com/MHeironimus/ArduinoJoystickLibrary 
+
+# move / make sure directory "Joystick" is in the ``` Arduino/libraries ``` folder.  
+# if you are using Arduino IDE, you could ``` zip ArduinoJoystickLibrary/Joystick ```
+# then add the archive as a .zip  in the Libraries menu.  
+# Or, if Arduino is installed at $HOME, ``` cp -rf Joystick ~/Arduino/libraries ```
+
+cd momo
+
+# you can change branches with 
+# ``` git checkout master ```
+# or ```git checkout testing ```
+
+# compile and upload:
+arduino --upload arduino/momo/momo.ino
+# :)
+```
+   
+   
+     
+***extra notes regarding cmake & compilation, YMMV:***     
     
 *USB port must be accessible to $USER:*
-```shell script
 
+```
 # to check permissions on port:
 ls -l /dev/ttyACM*
 
