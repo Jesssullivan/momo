@@ -2,7 +2,6 @@
 
 *A Simple Brake / Throttle controller w/ Arduino Leonardo- D&M WIP by Jess Sullivan*
    
-   
 # Quickstart:       
     
 For more introductions and notes on Open Source collaboration with the D&M Makerspace, visit:       
@@ -35,7 +34,14 @@ arduino --upload arduino/momo/momo.ino
 # :)
 ```
    
-   
+
+***Current features:***         
+    
+- USB "HID compliant" serial communication 
+- variable brake / throttle limits (-100 <--> 0 <--> 100) are saved to EEPROM 
+- limits can be reset / calibrated / updated on the fly 
+- 8 bit brake + throttle output regardless of V++ limits / motion constraints 
+
      
 ***extra notes regarding cmake & compilation, YMMV:***     
     

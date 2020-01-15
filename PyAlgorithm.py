@@ -2,9 +2,9 @@
 # @ https://github.com/jesssullivan
 
 
-
 def eval_range(val, rmax=1024, rmin=0):
-
+    # we can evaluate how constrained v++ will be mapped to a 8 bit integer over here in python,
+    # Arduino's IDE / library system is not setup for C++ 11+ std, vector, stl libraries!!
     val = (val - rmin) * (1024 / rmax)
 
     if val / 4 >= 127:

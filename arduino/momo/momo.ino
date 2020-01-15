@@ -156,10 +156,13 @@ void setup() {
 
 
 void loop() {
-    delay(5);  // delay value in ms, for read stability
+    delay(4);  // delay value in ms, for read stability
     if (resetPIN) {
         resetMaxMin();
     }
-    delay(5);  // delay value in ms, for read stability
+    delay(2);  // delay value in ms, for read stability
+    rmin = EEPROM.read(rminADDR);
+    rmax = EEPROM.read(rmaxADDR);
+    delay(2);
     setPin(dual, rmin, rmax);
 }
