@@ -5,11 +5,9 @@
  *
  * joystick library (rewrap of pluggableusb) available here:
  * https://github.com/MHeironimus/ArduinoJoystickLibrary
-
- * TODO: currently adding hardware limits!
-
+ *
  * compile with:
- * arduino --upload arduino/momo/momo.ino
+ * arduino --upload momo.ino
 *****************************************************************/
 
 #include <EEPROM.h>  // using leonardo only for now (attiny, etc later)
@@ -20,6 +18,8 @@ bool variableLimits = false;  // use reset hardware for on the fly limit adjustm
 
 // pinout:
 int dual = 0;  // potentiometer pin
+int resetPIN = 1;  // only used if using variable limits
+int multiLED = 2;  // only used if using variable limits
 
 // "throttle" limits:
 int t1 = 3;  // +45
@@ -72,8 +72,8 @@ int globalRead(int pin) {
     return int(val);
 }
 
-int getLimit(int pinMin, int PinMax) {
-    for (int i = pinMin; i <= PinMax; i++) {
+int getLimit(int pinMin, int pinMax) {
+    for (int i = pinMin; i <= pinMax; i++) {
         if (digitalRead(i)) {
             return i;
         }
@@ -81,15 +81,12 @@ int getLimit(int pinMin, int PinMax) {
 }       // if not detected- fault light?  what is the preferred behavior?
 
 
-void setPin(int pin, int rmin, int rmax) {  // todo- ref. to "readPin"
-
-    //  todo- ratio must be passed as an argument !
+void setPin(int pin, int rmin, int rmax) {
 
     int val = 0;
     int valRead = analogRead(pin);
 
-    if (valRead > 0) {  // no action if not true
-
+    if (valRead > 0) {
         // translate valRead to limits
         val = (valRead - rmin) * (1024 / rmax);
 
@@ -104,10 +101,13 @@ void setPin(int pin, int rmin, int rmax) {  // todo- ref. to "readPin"
             Joystick.setYAxis(-(val));
             logger("Brake", -(val));
         }
+    } else {
+        Joystick.setThrottle(0);
+        Joystick.setYAxis(-(val));
     }
 }
 
-
+// if using a resettable, variable ratio:
 void resetMaxMin() {
 
     int valA = 0;
@@ -151,7 +151,7 @@ void resetMaxMin() {
     EEPROM.write(rminADDR, rmin);
     delay(100);
     lprint("  ...  \n\n  ... \n\n");
-    EEPROM.write(rmaxADDR, rmsax);
+    EEPROM.write(rmaxADDR, rmax);
     lprint("Reset Complete!  :) \n\n");
     delay(100);
 }
@@ -160,34 +160,50 @@ void resetMaxMin() {
 
 void setup() {
 
-    // set conductive hardware limit inputs:
-    for (int i=t1; i<=b3; i++) {
-        pinMode(i, INPUT);
-    }
-
     if (variableLimits) {
         int resetPIN = 1;
         int multiLED = 2;
+    } else {
+        // set conductive hardware limit inputs:
+        for (int i = t1; i <= b3; i++) {
+            pinMode(i, INPUT);
+        }
     }
 
+        int blimit = getLimit(b1, b3);
+        int tlimit = getLimit(t1, t3);
 
+        for (int lim = blimit; lim <= tlimit; lim++) {
+            // set brake:
+            // following the lines of ``` 512 -/+ (512 / (270 / 45)) ```
+            if (lim == b1) { rmin = 426; }  // -45 degrees
+            if (lim == b2) { rmin = 398; }  // -60 degrees
+            if (lim == b3) { rmin = 369; }  // -75 degrees
+            // set throttle:
+            if (lim == b1) { rmax = 597; }  // +45 degrees
+            if (lim == b2) { rmax = 625; }  // +60 degrees
+            if (lim == b3) { rmax = 645; }  // +75 degrees
 
-    if (logs) {
-        Serial.begin(9600);
+        EEPROM.write(rminADDR, rmin);
+        EEPROM.write(rmaxADDR, rmax);
+        delay(4);
     }
+
+    if (logs) { Serial.begin(9600); }
 
     Joystick.begin();
-
 }
 
 void loop() {
-    delay(4);  // delay value in ms, for read stability
-    if (resetPIN) {
-        resetMaxMin();
-    }
+
     delay(2);  // delay value in ms, for read stability
-    rmin = EEPROM.read(rminADDR);
-    rmax = EEPROM.read(rmaxADDR);
-    delay(2);
-    setPin(dual, rmin, rmax);
+
+    if (variableLimits) {  // if using variable limits, checks if reset button is pressed:
+        if (resetPIN) {
+            resetMaxMin();
+        }
+    } else {  // default behavior
+        delay(2);  // delay value in ms, for read stability
+        setPin(dual, rmin, rmax);
+    }
 }
