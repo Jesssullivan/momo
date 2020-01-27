@@ -1,0 +1,4 @@
+ * TODO- finish python bootloader w/
+ *      - header --> .ino
+ *      - .elf  --> hex
+ *      - software hard reset
