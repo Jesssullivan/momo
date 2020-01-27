@@ -38,8 +38,9 @@ bool variableLimits = false;
 Joystick_ Joystick;
 
 // init global variables:
-int rmin = 0;
-int rmax = 0;
+float rmin = 0;
+float rmax = 0;
+float val = 0;
 int rminADDR = 1;
 int rmaxADDR = 2;
 
@@ -59,21 +60,41 @@ void indicateBlink() {
     }
 }
 
-void setPin(float pin=dual, float rmin=rmin, float rmax=rmax) {
+int setPin(float pin, float rmin, float rmax) {
+    
+    delay(2);
+    
     float valRead = analogRead(pin);
-    float val = (valRead - rmin) / (rmax - rmin) * 254;
-    if (valRead >= (rmax - rmin) / 2) {  // todo- setup detent //
-        Joystick.setThrottle(val);
-        lprint("Throttle = " + String(val));
-    } else {
-        Joystick.setYAxis(val);
-        lprint("Brake = " + String(val));
+    
+    if (valRead >= rmax) { 
+      Joystick.setThrottle(254);
+      lprint("Throttle = 254 \n");
+      return 1;
     }
+
+    if (valRead <= rmin) { 
+      Joystick.setYAxis(val);
+      lprint("Brake = 254 \n");
+      return 1;
+    }
+    
+    float val = (valRead - rmin) / (rmax - rmin) * 254;
+    val = val < 0 ? -val : val; 
+    
+    if (val >= (rmax - rmin) / 2) {  // todo- setup detent //
+        Joystick.setThrottle(val);
+        lprint("Throttle = " + String(val) + "\n");
+    } else {
+        val = ((rmax -rmin) / 2) - val;
+        Joystick.setYAxis(val);
+        lprint("Brake = " + String(val) + "\n");
+    }
+    return 1;
 }
 
 // FOR VARIABLE LIMITS ONLY:
 int globalRead(int pin) {
-    int val = 0;
+    val = 0;
     indicateBlink();
     val = analogRead(pin);
     return int(val);
@@ -153,12 +174,11 @@ void setup() {
             if (i == t1) { rmax = 597; }  // +45 degrees
             if (i == t2) { rmax = 625; }  // +60 degrees
             if (i == t3) { rmax = 645; }  // +75 degrees
-        }
     }
-
     if (logs) { Serial.begin(9600); }
     Joystick.begin();
     delay(4);
+    }
 }
 
 
@@ -169,6 +189,5 @@ void loop() {
             resetMaxMin();
         }
     }
-    setPin(dual);
+    setPin(dual, rmin, rmax);
 }
-
