@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////
-// Split potentiometer Brake / Throttle controller w/ Arduino Leonardo
+// Adaptive brake / throttle controller w/ Arduino Leonardo
 //
 // a WIP by for the D&M Makerspace @ https://github.com/jesssullivan
 //
@@ -10,8 +10,11 @@
 // arduino --upload momo/momo.ino
 ///////////////////////////////////////////////////////////////
 
-#include <Joystick.h>
-#include <EEPROM.h>  // only used for on the fly limit adjustment
+#include <Joystick.h>  // https://github.com/MHeironimus/ArduinoJoystickLibrary
+#include <Encoder.h> // @ pjrc: http://www.pjrc.com/teensy/td_libs_Encoder.html
+
+// sensor type - encoder or potentiometer?
+bool encoder = true;
 
 // use Arduino Serial monitor?
 bool logs = true;
@@ -19,15 +22,20 @@ bool logs = true;
 // use additional reset hardware for on the fly limit adjustment?
 bool variableLimits = false;
 
-// sensor rotation in degrees (most potentiometers are 270 degrees)
-int sensRotation = 360;
+// potentiometer rotation in degrees (most potentiometers are 270 degrees)
+int potRotation = 360;
+
+// encoder- phase cycles per rotation:
+int encRes = 600;
 
 // pinout:
 int dual = 0;  // potentiometer pin
-int encA = 1;  // encoder first bit pin
-int encB = 2;  // encoder alt bit pin
-// int resetPin = 1;  // if using on the fly variable adjustment
-//int resetLED = 2; // if using on the fly variable adjustment
+int encA = 9;  // encoder first phase pin
+int encB = 10;  // encoder alt phase pin
+Encoder enc(encA, encB);
+
+int resetPin = -999;  // if using on the fly variable adjustment
+int resetLED = -999; // if using on the fly variable adjustment
 
 // "throttle" limit pinout- digitalread(), default is 0
 int t1 = 3;
@@ -52,13 +60,18 @@ Joystick_ Joystick;
 float rmin = 0;
 float rmax = 0;
 float val = 0;
-int rminADDR = 1;   // if using on the fly variable adjustment
-int rmaxADDR = 2;   // if using on the fly variable adjustment
-
+long pos  = -999;
+long restingValue;
+long tvalue = 0;
+unsigned long time = millis();
 
 void lprint(String text) {
-    if (logs) {
-        Serial.print(text);  // arduino type "String" is only for Serial.print()
+    if (millis() - time >= 1200) {
+        if (logs) {
+            Serial.print(text);  // arduino type "String" is only for Serial.print()
+            Serial.print("\n");
+        }
+        time = millis();
     }
 }
 
@@ -71,17 +84,16 @@ void indicateBlink() {
     }
 }
 
-void setPin(float pin, float rmin, float rmax) {
+int setPin(float pin, float rmin, float rmax) {
     delay(1);
     float valRead = analogRead(pin);
     if (valRead >= rmax) {
-      Joystick.setThrottle(254);
-      lprint("Throttle = 254 \n");
+        Joystick.setThrottle(254);
         exit(0);
     } else if (valRead <= rmin) {
-      Joystick.setYAxis(val);
-      lprint("Brake = 254 \n");
-      exit(0);
+        Joystick.setYAxis(val);
+        lprint("Brake = 254 \n");
+        exit(0);
     }
     val = val < 0 ? -val : val;  // gets absolute value
     float val = ((valRead - rmin) / (rmax - rmin)) * 254;
@@ -96,111 +108,105 @@ void setPin(float pin, float rmin, float rmax) {
 }
 
 void setEncoder() {
-    // todo- wip!
-    int a = digitalRead(encA);
-    int b = digitalRead(ncB);
-    if (a != pstate) {
-        int pstate = a^b ? pos-- : pos++;
-       // todo- send pstate to 8 bit serial
+    tvalue = enc.read() / 4;
+    if (tvalue != restingValue) { restingValue = tvalue; }
+    if (tvalue <= 0) {
+        tvalue = tvalue < 0 ? -tvalue : tvalue;  // gets absolute value
+        Joystick.setThrottle(tvalue);
+        lprint("Throttle = " + String(tvalue));
+    } else {
+        tvalue = tvalue < 0 ? -tvalue : tvalue;  // gets absolute value
+        Joystick.setYAxis(tvalue);
+        lprint("Brake = " + String(tvalue));
     }
 }
 
-// FOR VARIABLE LIMITS ONLY:
-int globalRead(int pin) {
+int globalRead(int pin) {  // for variable limits
     val = 0;
     indicateBlink();
     val = analogRead(pin);
     return int(val);
 }
 
-// if using a resettable, variable ratio
+// if using a resettable, variable ratio:
 void resetMaxMin() {
-
     int valA = 0;
     int valB = 0;
     digitalWrite(resetLED, HIGH);
     delay(400);
-
+    // start communicating with user:
     indicateBlink();
-
     lprint("Setting up limits ... \n");
     lprint("\n");
     delay(200);
-
     lprint("getting first value ... \n");
     lprint("\n");
     delay(500);
-
     valA = globalRead(dual);
     lprint("received value  " + String(valA));
     lprint("\n\n");
-
     indicateBlink();
-
     delay(500);
     lprint("getting second value ... \n");
     lprint("\n");
     delay(500);
-
     valB = globalRead(dual);
     lprint("received value  " + String(valB));
     lprint("\n\n");
-
+    // set brake / throttle based on value:
     rmin = (valA > valB) ? valB : valA;
     rmax = (valA < valB) ? valB : valA;
-
     lprint("Finished setup: maxValue = " + String(rmax) + " \n");
-    lprint("\n");
+    lprint(" ... \n");
     lprint("Finished setup: minValue = " + String(rmin) + " \n");
-    lprint("\n");
-    lprint("Writing to EEPROM ... \n\n  ...  \n\n  ... \n\n");
-    EEPROM.write(rminADDR, rmin);
+    lprint(" ... \n");
     delay(100);
-    lprint("  ...  \n\n  ... \n\n");
-    EEPROM.write(rmaxADDR, rmax);
     lprint("Reset Complete!  :) \n\n");
     delay(100);
 }
 
-
 void setup() {
-
     if (variableLimits) {
         pinMode(resetPin, INPUT);
         pinMode(resetLED, INPUT);
-
-        if (EEPROM.read(rmaxADDR) > 100) {
-            rmin = EEPROM.read(rminADDR);
-            rmax = EEPROM.read(rmaxADDR);
+        delay(10);
+        resetMaxMin();  // set reset right away without need for EEPROM i/o
+        delay(10);
+    } else {
+        for (int i = t1; i <= b3; i++) {
+            pinMode(i, INPUT);
         }
     }
-
+    if (logs) { Serial.begin(9600); }
+    if (! encoder) {
+        Joystick.begin();
+        delay(4);
+    }
+    int deg10bit = 1024 / potRotation;
     for (int i = t1; i <= b3; i++) {
-        pinMode(i, INPUT);
-        int deg10bit = 1024 / sensRotation;
         if (digitalRead(i)) {
             // sets brake direction
-            if (i == b1) { rmin = 512 - (deg10bit * b1degrees); }
-            if (i == b2) { rmin = 512 - (deg10bit * b2degrees); }
-            if (i == b3) { rmin = 512 - (deg10bit * b3degrees); }
+            if (i == b1) { if (! encoder) { rmin = 512 - (deg10bit * b1degrees); } else { rmin = b1degrees; }}
+            if (i == b2) { if (! encoder) { rmin = 512 - (deg10bit * b2degrees); } else { rmin = b2degrees; }}
+            if (i == b3) { if (! encoder) { rmin = 512 - (deg10bit * b2degrees); } else { rmin = b3degrees; }}
             // sets throttle direction
-            if (i == t1) { rmax = 512 + (deg10bit * t1degrees); }
-            if (i == t2) { rmax = 512 + (deg10bit * t2degrees); }
-            if (i == t3) { rmax = 512 + (deg10bit * t2degrees); }
-    }
-    if (logs) { Serial.begin(9600); }
-    Joystick.begin();
-    delay(4);
+            if (i == t1) { if (! encoder) { rmin = 512 + (deg10bit * b1degrees); } else { rmax = t1degrees; }}
+            if (i == t2) { if (! encoder) { rmin = 512 + (deg10bit * b2degrees); } else { rmax = t2degrees; }}
+            if (i == t3) { if (! encoder) { rmin = 512 + (deg10bit * b3degrees); } else { rmax = t3degrees; }}
+        }
     }
 }
 
 
 void loop() {
-    delay(4);  // delay value in ms, for read stability
     if (variableLimits) {
         if (resetPin) {
             resetMaxMin();
         }
     }
-    setPin(dual, rmin, rmax);
+    if (encoder) {
+        setEncoder();
+    } else {
+        setPin(dual, rmin, rmax);
+    }
 }
