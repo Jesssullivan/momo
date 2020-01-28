@@ -1,6 +1,6 @@
 # MOMO:
 
-*A Simple Brake / Throttle controller w/ Arduino Leonardo- D&M WIP by Jess Sullivan*
+*Adaptive brake / throttle controller w/ Arduino Leonardo - a D&M WIP by Jess Sullivan*
    
 # Quickstart:       
     
@@ -17,6 +17,9 @@ git clone https://github.com/jesssullivan/momo
 
 # get updated joystick library:
 git clone https://github.com/MHeironimus/ArduinoJoystickLibrary 
+
+# encoder support uses pjrc's library (standard `Encoder` lib available from arduino IDE)
+#  pjrc: http://www.pjrc.com/teensy/td_libs_Encoder.html
 
 # move / make sure directory "Joystick" is in the ``` Arduino/libraries ``` folder.  
 # if you are using Arduino IDE, you could ``` zip ArduinoJoystickLibrary/Joystick ```
@@ -38,15 +41,14 @@ arduino --upload arduino/momo/momo.ino
 ***Current features:***         
     
 - USB "HID compliant" serial communication 
-- variable brake / throttle limits (-100 <--> 0 <--> 100) are saved to EEPROM 
-- limits can be reset / calibrated / updated on the fly 
 - 8 bit brake + throttle output regardless of V++ limits / motion constraints 
+- supports configuration for either analog (potentiometer) and digital (encoder) sensors
+- limits can be reset / calibrated / updated on the fly 
 
      
 ***extra notes regarding cmake & compilation, YMMV:***     
     
 *USB port must be accessible to $USER:*
-
 ```
 # to check permissions on port:
 ls -l /dev/ttyACM*

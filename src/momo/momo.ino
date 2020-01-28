@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////
-// Split potentiometer Brake / Throttle controller w/ Arduino Leonardo
+// Adaptive brake / throttle controller w/ Arduino Leonardo
 //
 // a WIP by for the D&M Makerspace @ https://github.com/jesssullivan
 //
@@ -9,5 +9,4 @@
 // compile with:
 // arduino --upload momo/momo.ino
 ///////////////////////////////////////////////////////////////
-
 #include "momo.h"
