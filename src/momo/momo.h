@@ -17,7 +17,7 @@
 bool encoder = true;
 
 // use Arduino Serial monitor?
-bool logs = true;
+bool logs = false;
 
 // use additional reset hardware for on the fly limit adjustment?
 bool variableLimits = false;
@@ -178,10 +178,6 @@ void setup() {
         }
     }
     if (logs) { Serial.begin(9600); }
-    if (! encoder) {
-        Joystick.begin();
-        delay(4);
-    }
     int deg10bit = 1024 / potRotation;
     for (int i = t1; i <= b3; i++) {
         if (digitalRead(i)) {
@@ -195,6 +191,7 @@ void setup() {
             if (i == t3) { if (! encoder) { rmin = 512 + (deg10bit * b3degrees); } else { rmax = t3degrees; }}
         }
     }
+    Joystick.begin();
 }
 
 
