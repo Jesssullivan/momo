@@ -3,4 +3,5 @@
 venv
 venv/
 cmake-build-debug
+cad
 
