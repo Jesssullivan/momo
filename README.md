@@ -15,8 +15,17 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 - configurable for either digital (encoder) or analog (potentiometer) angle sensors
 - USB "HID compliant" serial communication 
 - 8 bit brake + throttle output regardless of motion constraints or hardware type
+    
+        
+***Hardware Source Links (Fusion 360):***
 
+<br>
+         
+- [Digital, bolt limited: https://a360.co/2RPwRd8](https://a360.co/2RPwRd8)
+- [Analog, bolt limited: https://a360.co/2GOPYxu](https://a360.co/2GOPYxu)
+- [Analog, variable limits: https://a360.co/2UkeMFu](https://a360.co/2UkeMFu)
 
+<br>
 
 <h4 id="foobar"> </h4>     
 
