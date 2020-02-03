@@ -3,14 +3,28 @@
 *Adaptive brake / throttle controller w/ Arduino Leonardo - a D&M WIP by Jess Sullivan*
    
 # Quickstart:       
+ 
+<br>
     
+[*Jump to Quickstart Instructions*](#foobar)  
+          
 For more introductions and notes on Open Source collaboration with the D&M Makerspace, visit:       
 - [Some {development} software notes here](https://github.com/PSU-HC/home-wiki/wiki/Developer-Student-Software)
 - [Some {rapid fabrication} software notes here](https://github.com/PSU-HC/home-wiki/wiki/CAD-CAM-Student-Software)
 - [...Or the D&M Makerspace Home Page over here](https://makerspace.plymouthcreate.net/)
-
     
-       
+***Current features:***         
+        
+- single, split lever brake / throttle        
+- configurable for either digital (encoder) or analog (potentiometer) angle sensors
+- USB "HID compliant" serial communication 
+- 8 bit brake + throttle output regardless of motion constraints or hardware type
+
+
+<h4 id="#foobar"> </h4>     
+
+<br>
+
 ```shell script
 # clone this repo:
 git clone https://github.com/jesssullivan/momo 
@@ -22,30 +36,29 @@ git clone https://github.com/MHeironimus/ArduinoJoystickLibrary
 #  pjrc: http://www.pjrc.com/teensy/td_libs_Encoder.html
 
 # move / make sure directory "Joystick" is in the ``` Arduino/libraries ``` folder.  
-# if you are using Arduino IDE, you could ``` zip ArduinoJoystickLibrary/Joystick ```
-# then add the archive as a .zip  in the Libraries menu.  
-# Or, if Arduino is installed at $HOME, ``` cp -rf Joystick ~/Arduino/libraries ```
+# if you are using Arduino IDE, you could do something like:
+zip ~/Downloads/ArduinoJoystickLibrary/Joystick .
+# ....then add the archive as a .zip  in the Libraries menu.  
+# Or if Arduino is installed at $HOME, something along the lines of:
+cp -rf Joystick ~/Arduino/libraries 
 
-cd momo
+# edit the config.h file for pinout, hardware selection, etc
+gedit src/UnifiedThrottleBrake/config.h
 
-# you can change branches with 
-# ``` git checkout master ```
-# or ```git checkout testing ```
+cd momo/src
 
-# compile and upload:
-arduino --upload arduino/momo/momo.ino
+# compile and upload from your shell
+# (alternatively your can use the Arduino IDE uploader)
+arduino --upload UnifiedThrottleBrake/UnifiedThrottleBrake.ino
+
+# you can change branches with:
+git checkout master
+# or:
+git checkout testing
 # :)
 ```
-   
-
-***Current features:***         
     
-- USB "HID compliant" serial communication 
-- 8 bit brake + throttle output regardless of V++ limits / motion constraints 
-- supports configuration for either analog (potentiometer) and digital (encoder) sensors
-- limits can be reset / calibrated / updated on the fly 
-
-     
+  
 ***extra notes regarding cmake & compilation, YMMV:***     
     
 *USB port must be accessible to $USER:*
@@ -61,7 +74,6 @@ sudo chmod a+rw /dev/ttyACM0
 ```
     
 *Regarding cmake, intellij, etc-
-the standard arduino executable + gui is still preferred for actually uploading to arduino hardware*
     
 ```shell script
 # get ide here, at least for uploading arduino .elf:
@@ -86,5 +98,5 @@ wget https://raw.githubusercontent.com/omnidan/ArduinoPure/master/arduino/USBAPI
     
 *.elf --> hex:*
 ``` shell script
-avr-objcopy -j .text -j .data -O ihex my_project.elf my_project.hex
+avr-objcopy -j .text -j .data -O ihex main.elf main.hex
 ```     
