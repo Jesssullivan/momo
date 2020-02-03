@@ -1,12 +1,8 @@
 # MOMO:
 
 *Adaptive brake / throttle controller w/ Arduino Leonardo - a D&M WIP by Jess Sullivan*
-   
-# Quickstart:       
- 
-<br>
-    
-[*Jump to Quickstart Instructions*](#foobar)  
+              
+[***Jump to Quickstart Instructions***](#foobar)  
           
 For more introductions and notes on Open Source collaboration with the D&M Makerspace, visit:       
 - [Some {development} software notes here](https://github.com/PSU-HC/home-wiki/wiki/Developer-Student-Software)
@@ -21,9 +17,8 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 - 8 bit brake + throttle output regardless of motion constraints or hardware type
 
 
-<h4 id="#foobar"> </h4>     
 
-<br>
+<h4 id="foobar"> </h4>     
 
 ```shell script
 # clone this repo:
