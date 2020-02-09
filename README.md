@@ -1,7 +1,6 @@
-# MOMO:
+# MOMO
+  
 
-*Adaptive brake / throttle controller w/ Arduino Leonardo - a D&M WIP by Jess Sullivan*
-              
 [***Jump to Quickstart Instructions***](#foobar)  
           
 For more introductions and notes on Open Source collaboration with the D&M Makerspace, visit:       
@@ -14,11 +13,17 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 - single, split lever brake / throttle        
 - configurable for either digital (encoder) or analog (potentiometer) angle sensors
 - USB "HID compliant" serial communication 
-- 8 bit brake + throttle output regardless of motion constraints or hardware type
-    
+- 8 bit brake + throttle output regardless of motion constraints or hardware type   
+
+*In progress:*
+  
+- Rebound support for throttle / brake
+- Updates in the works for SimuCUBE FFB w/ STM32F4 microcontroller
         
+          
 ***Hardware Source Links (Fusion 360):***
      
+- [Digital, Powered motion - WIP](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9680486105b49c7f3c5)
 - [Digital, bolt limited: https://a360.co/2RPwRd8](https://a360.co/2RPwRd8)
 - [Analog, bolt limited: https://a360.co/2GOPYxu](https://a360.co/2GOPYxu)
 - [Analog, variable limits: https://a360.co/2UkeMFu](https://a360.co/2UkeMFu)
