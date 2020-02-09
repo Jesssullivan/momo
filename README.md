@@ -23,7 +23,8 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
           
 ***Hardware Source Links (Fusion 360):***
      
-- [Digital, Powered motion - WIP](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9680486105b49c7f3c5)
+- [Digital + powered feedback - WIP](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9680486105b49c7f3c5)
+- [Digital, simplified limits](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd968133e296ee005ddd1)
 - [Digital, bolt limited: https://a360.co/2RPwRd8](https://a360.co/2RPwRd8)
 - [Analog, bolt limited: https://a360.co/2GOPYxu](https://a360.co/2GOPYxu)
 - [Analog, variable limits: https://a360.co/2UkeMFu](https://a360.co/2UkeMFu)
