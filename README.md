@@ -1,7 +1,9 @@
 # MOMO
 
+<br>
 
-[***Jump to Quickstart Instructions***](#quickstart)  <br>
+[***Jump to Quickstart Instructions***](#quickstart)  
+<br>
 
 [Jump to Fusion 360 demo design](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97) <br>
 
@@ -12,7 +14,8 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 - [Some {development} software notes here](https://github.com/PSU-HC/home-wiki/wiki/Developer-Student-Software)
 - [Some {rapid fabrication} software notes here](https://github.com/PSU-HC/home-wiki/wiki/CAD-CAM-Student-Software)
 - [...Or the D&M Makerspace Home Page over here](https://makerspace.plymouthcreate.net/)
-    
+ 
+ 
 ***Current features:***           
         
 - single, split lever brake / throttle        
@@ -28,12 +31,12 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 - SimuCUBE FFB w/ STM32F4 microcontroller
 - Rebound support for throttle / brake   
 
-<br>    
-<br>   
+<br>     
 
 ***Quickstart:***   <br>
 
 <h4 id="quickstart"> </h4>     
+
 ```shell script
 # clone this repo:
 git clone https://github.com/jesssullivan/momo 
