@@ -3,10 +3,7 @@
 <br>
 
 [***Jump to Quickstart Instructions***](#quickstart)  
-<br>
-
 [Jump to Fusion 360 demo design](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97) <br>
-
 [Jump to all designs](#drawings)
 <br>
 
@@ -71,6 +68,7 @@ git checkout testing
 ```
     
 <h4 id="drawings"> </h4>     
+
 ***Hardware Source Links (Fusion 360):***
 
 <br>
