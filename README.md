@@ -25,7 +25,7 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 *In progress:*
 - *....Add wheel* 
 - Support for DRVs
-- SimuCUBE FFB w/ STM32F4 microcontroller
+- [SimuCUBE's](https://github.com/SimuCUBE/SimuCUBE-OpenSource-Firmware) FFB w/ STM32F4 microcontroller
 - Rebound support for throttle / brake   
 
 <br>     
