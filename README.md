@@ -1,8 +1,13 @@
 # MOMO
 
 
-[***Jump to Quickstart Instructions***](#foobar)  
-          
+[***Jump to Quickstart Instructions***](#quickstart)  <br>
+
+[Jump to Fusion 360 demo design](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97) <br>
+
+[Jump to all designs](#drawings)
+<br>
+
 For more introductions and notes on Open Source collaboration with the D&M Makerspace, visit:       
 - [Some {development} software notes here](https://github.com/PSU-HC/home-wiki/wiki/Developer-Student-Software)
 - [Some {rapid fabrication} software notes here](https://github.com/PSU-HC/home-wiki/wiki/CAD-CAM-Student-Software)
@@ -15,25 +20,20 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 - USB "HID compliant" serial communication 
 - 8 bit brake + throttle output regardless of motion constraints or hardware type   
 
+<br>
+
 *In progress:*
 - *....Add wheel* 
 - Support for DRVs
 - SimuCUBE FFB w/ STM32F4 microcontroller
 - Rebound support for throttle / brake   
 
-          
-***Hardware Source Links (Fusion 360):***
+<br>    
+<br>   
 
-- **[22.2mm Digital Limited](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97)**  
-- [22.2 Digital + powered feedback (WIP)](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9680486105b49c7f3c5)
-- [Digital, single limit](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd968133e296ee005ddd1)
-- [Digital, bolt limited](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9682a1ff9148d0f03e5)
-- [Analog, bolt limited](https://a360.co/2Rb2a1w)
-- [Analog, variable limits](https://a360.co/30D7Ft9)
-    
-    
-<h4 id="foobar"> </h4>     
+***Quickstart:***   <br>
 
+<h4 id="quickstart"> </h4>     
 ```shell script
 # clone this repo:
 git clone https://github.com/jesssullivan/momo 
@@ -67,7 +67,20 @@ git checkout testing
 # :)
 ```
     
-  
+<h4 id="drawings"> </h4>     
+***Hardware Source Links (Fusion 360):***
+
+<br>
+ 
+- **[22.2mm Digital Limited](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97)**  
+- [22.2 Digital + powered feedback (WIP)](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9680486105b49c7f3c5)
+- [Digital, single limit](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd968133e296ee005ddd1)
+- [Digital, bolt limited](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9682a1ff9148d0f03e5)
+- [Analog, bolt limited](https://a360.co/2Rb2a1w)
+- [Analog, variable limits](https://a360.co/30D7Ft9)
+
+<br>
+    
 ***extra notes regarding cmake & compilation, YMMV:***     
     
 *USB port must be accessible to $USER:*
