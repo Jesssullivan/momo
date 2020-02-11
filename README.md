@@ -1,5 +1,5 @@
 # MOMO
-  
+
 
 [***Jump to Quickstart Instructions***](#foobar)  
           
@@ -8,7 +8,7 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 - [Some {rapid fabrication} software notes here](https://github.com/PSU-HC/home-wiki/wiki/CAD-CAM-Student-Software)
 - [...Or the D&M Makerspace Home Page over here](https://makerspace.plymouthcreate.net/)
     
-***Current features:***         
+***Current features:***           
         
 - single, split lever brake / throttle        
 - configurable for either digital (encoder) or analog (potentiometer) angle sensors
@@ -16,14 +16,16 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
 - 8 bit brake + throttle output regardless of motion constraints or hardware type   
 
 *In progress:*
-  
-- Rebound support for throttle / brake
-- Updates in the works for SimuCUBE FFB w/ STM32F4 microcontroller
-        
+- *....Add wheel* 
+- Support for DRVs
+- SimuCUBE FFB w/ STM32F4 microcontroller
+- Rebound support for throttle / brake   
+
           
 ***Hardware Source Links (Fusion 360):***
-     
-- [Digital + powered feedback - WIP](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9680486105b49c7f3c5)
+
+- **[22.2mm Digital Limited](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97)**  
+- [22.2 Digital + powered feedback (WIP)](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9680486105b49c7f3c5)
 - [Digital, single limit](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd968133e296ee005ddd1)
 - [Digital, bolt limited](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9682a1ff9148d0f03e5)
 - [Analog, bolt limited](https://a360.co/2Rb2a1w)
