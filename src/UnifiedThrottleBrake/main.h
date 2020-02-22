@@ -60,15 +60,30 @@ void setPot(float pin, float rmin, float rmax) {
     }
 }
 
+
+void stepperReturn(long enc) {
+    digitalWrite(S_dir, DIR);  // initial stepper value sets direction
+    if (encRead <= 0) {
+
+        for (int i = 1; i <= 4; i++) {
+        if (millis() - S_time >= 4) {
+            digitalWrite(S_Pin, (i % 2 == 0 ? LOW : HIGH));
+        }
+    }
+}
+
+
 // encoder- reads and sets brake / throttle
 void setEncoder() {
     encRead = enc.read() / 4;  // dividing by 4 may be specific to our (4x oversampled) encoder, YMMV
     if (encRead >= rmax) {
         Joystick.setThrottle(254);
+        stepperHold();
         lprint("Throttle = 254 \n");
         exit(0);
     } else if (valRead <= rmin) {
         Joystick.setYAxis(254);
+        stepperHold();
         lprint("Brake = 254 \n");
         exit(0);
     }
@@ -181,6 +196,24 @@ void potMaxMin() {
 }
 
 void setup() {
+
+    //  STEPPER INIT:
+    unsigned long S_time = millis();
+
+    // setup outputs
+    pinMode(S_dir, OUTPUT);
+    pinMode(X_step, OUTPUT);
+
+    // microstepping pins
+    pinMode(S_M0, OUTPUT);
+    pinMode(S_M1, OUTPUT);
+    pinMode(S_M2, OUTPUT);
+
+    // EXPLICITLY DISABLING microstepping:
+    digitalWrite(S_M1, LOW);
+    digitalWrite(S_M1, LOW);
+    digitalWrite(S_M2, LOW);
+
     if (! variableLimits) {
         encMaxMin();
     } else {

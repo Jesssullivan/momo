@@ -49,3 +49,7 @@ int b2 = 7;
 int b2degrees = 30;
 int b3 = 8;
 int b3degrees = 45;
+
+// DRV + stepper pinout:
+int S_dir = 6
+int S_pin = 7
