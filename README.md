@@ -74,7 +74,7 @@ git checkout testing
 
 <br>
      
-- ***[22.2 Reversed Mount Digital](https://a360.co/2SPmxSL)***
+- ***[22.2 Reversed Mount Digital](https://a360.co/2VeH4Sv)***
 - **[22.2 Enclosed Digital](https://a360.co/2PidrMl)**
 - [22.2mm Digital Limited](https://a360.co/2vDDMxk)
 - [22.2 Digital + powered feedback (WIP)](https://a360.co/2P3snh5)
