@@ -73,9 +73,10 @@ git checkout testing
 ***Hardware Source Links (Fusion 360):***
 
 <br>
-     
-- ***[22.2 Reversed Mount Digital](https://a360.co/2VeH4Sv)***
+ 
+- ***[22.2 Reversed Mount Digital](https://a360.co/2va2tBE)
 - **[22.2 Enclosed Digital](https://a360.co/2PidrMl)**
+- [alt. Shelled 22.2 Reversed Mount Digital](https://a360.co/2VeH4Sv)
 - [22.2mm Digital Limited](https://a360.co/2vDDMxk)
 - [22.2 Digital + powered feedback (WIP)](https://a360.co/2P3snh5)
 - [Digital, single limit](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd968133e296ee005ddd1)
