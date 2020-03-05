@@ -98,7 +98,7 @@ ls -l /dev/ttyACM*
 sudo adduser $USER dialout
 
 # to change permissions at port:
-sudo chmod a+rw /dev/ttyACM0
+sudo chmod a+wrw /dev/ttyACM0
 ```
     
 *Regarding cmake, intellij, etc-
@@ -107,7 +107,7 @@ sudo chmod a+rw /dev/ttyACM0
 # get ide here, at least for uploading arduino .elf:
 # https://www.arduino.cc/en/Main/Software
 
-# something along the lines of:
+# something along the lines of:~~~~
 tar xvf arduino-1.8.10/arduino-1.8.10-linux64.tar.xz 
 chmod u+x arduino-1.8.10/install.sh
 sudo ./arduino-1.8.10/install.sh
