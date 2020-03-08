@@ -1,10 +1,11 @@
-# MOMO
+# 
 
 <br>
 
 [***Jump to Quickstart Instructions***](#quickstart)  
-[***Jump to Fusion 360 demo design***](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97) <br>
+[***Link- demo CAD files w/ Fusion 360***](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97) <br>
 [***Jump to all designs***](#drawings)
+[*Jump to additional notes*](#notes)
 <br>
 
 For more introductions and notes on Open Source collaboration with the D&M Makerspace, visit:       
@@ -15,19 +16,16 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
  
 ***Current features:***           
         
-- single, split lever brake / throttle        
-- configurable for either digital (encoder) or analog (potentiometer) angle sensors
-- USB "HID compliant" serial communication 
-- 8 bit brake + throttle output regardless of motion constraints or hardware type   
+- single lever for brake & throttle     
+- hardware uses standard, 22.2mm diameter handlebar tubing  
+- configurable on the fly for either left (CW = throttle) or right (CCW = throttle) controls    
+- USB "HID compliant" serial communication  
+- 8 bit brake + throttle output regardless of motion constraints or hardware type       
 
 <br>
-
-*In progress:*
-- *....Add wheel* 
-- Support for DRVs
-- Incorporate [SimuCUBE's](https://github.com/SimuCUBE/SimuCUBE-OpenSource-Firmware) FFB 
-- support for STM32F4 microcontroller
-- Rebound support for throttle / brake   
+    
+*Previously:*
+- configurable for either digital (encoder) or analog (potentiometer) angle sensors
 
 <br>     
 
@@ -52,19 +50,17 @@ zip ~/Downloads/ArduinoJoystickLibrary/Joystick .
 # Or if Arduino is installed at $HOME, something along the lines of:
 cp -rf Joystick ~/Arduino/libraries 
 
-# edit the config.h file for pinout, hardware selection, etc
-gedit src/UnifiedThrottleBrake/config.h
+cd momo
 
-cd momo/src
+# edit the main.h (pinout, logging, etc):
+nano main.h
 
 # compile and upload from your shell
 # (alternatively your can use the Arduino IDE uploader)
-arduino --upload UnifiedThrottleBrake/UnifiedThrottleBrake.ino
+arduino --upload utb.ino
 
-# you can change branches with:
-git checkout master
-# or:
-git checkout testing
+# you could work on another branch with:
+# git checkout testing
 # :)
 ```
     
@@ -86,12 +82,16 @@ git checkout testing
 - [Analog, variable limits](https://a360.co/30D7Ft9)
 
 <br>
-    
+<br>
+        
+        
+<h4 id="notes"> </h4>     
+
 ***extra notes regarding cmake & compilation, YMMV:***     
     
 *USB port must be accessible to $USER:*
 ```
-# to check permissions on port:
+# to checks  permissions on port:
 ls -l /dev/ttyACM*
 
 # add $USER to rw group of port, usually group 'dialout':
