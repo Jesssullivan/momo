@@ -49,28 +49,6 @@ void lprint(String text) {
     }
 }
 
-// encoder- reads and sets brake / throttle
-void setEncoder() {
-    encRead = enc.read() / 4;  // dividing by 4 may be specific to our (4x oversampled) encoder, YMMV
-    if (encRead >= rmax) {
-        Joystick.setThrottle(254);
-        lprint("Throttle = 254 \n");
-        exit(0);
-    } else if (valRead <= rmin) {
-        Joystick.setYAxis(254);
-        lprint("Brake = 254 \n");
-        exit(0);
-    }
-    if (encRead <= 0) {
-        encRead = encRead < 0 ? -encRead : encRead;  // gets absolute value
-        Joystick.setThrottle(encRead);
-        lprint("Throttle = " + String(encRead));
-    } else {
-        encRead = encRead < 0 ? -encRead : encRead;  // gets absolute value
-        Joystick.setYAxis(encRead);
-        lprint("Brake = " + String(encRead));
-    }
-}
 
 void setup() {
     float rmin = 512 + (deg10bit * 25);
