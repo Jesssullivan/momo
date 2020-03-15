@@ -9,14 +9,25 @@
 // http://www.pjrc.com/teensy/td_libs_Encoder.html
 //
 // compile with:
-// arduino --upload UnifiedThrottleBrake/UnifiedThrottleBrake.ino
+// arduino --upload utb.ino
 //////////////////////////////////////////////////////////////////////////
 
-#include <Joystick.h>  // https://github.com/MHeironimus/ArduinoJoystickLibrary
-#include <Encoder.h> // @ pjrc: http://www.pjrc.com/teensy/td_libs_Encoder.html
+// pinout:
+int encA = 8;  // encoder's phase 1
+int encB = 9;  // encoder's phase 2
+int buttonLR = 10;  // momentary switch toggles lever orientation, reverses throttle / brake
+int ledL = 11;  // lever direction is Left LED
+int ledR = 12;  // lever direction is Right LED
 
-// configuration file:
-#include "config.h"
+// use Serial monitor?
+bool logs = true;
 
-// main sketch:
-#include "main.h"
+// resting position variance in encoder steps:
+int variance = 22;
+
+// multiplier for encoder value- larger value == more sensitive
+float mx = 1.6;
+
+// timers:
+int T_lprint = 750; // logging frequency in ms
+int T_btn = 4;  // button sensitivity

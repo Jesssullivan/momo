@@ -12,4 +12,13 @@
 // arduino --upload UnifiedThrottleBrake/UnifiedThrottleBrake.ino
 //////////////////////////////////////////////////////////////////////////
 
+// https://github.com/MHeironimus/ArduinoJoystickLibrary
+#include <Joystick.h>
+
+// http://www.pjrc.com/teensy/td_libs_Encoder.html
+#include <Encoder.h>
+
+// pinout, configuration:
+#include "config.h"
+
 #include "main.h"

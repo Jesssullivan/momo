@@ -1,6 +1,10 @@
 # 
 
 <br>
+        
+*a WIP by for the D&M Makerspace @ https://github.com/jesssullivan*
+        
+<br>
 
 [***Jump to Quickstart Instructions***](#quickstart)  
 [***Link- demo CAD files w/ Fusion 360***](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97) <br>
@@ -16,9 +20,9 @@ For more introductions and notes on Open Source collaboration with the D&M Maker
  
 ***Current features:***           
         
-- single lever for brake & throttle     
+- robust, single lever for brake & throttle     
 - hardware uses standard, 22.2mm diameter handlebar tubing  
-- configurable on the fly for either left (CW = throttle) or right (CCW = throttle) controls    
+- configurable on the fly for either left (CW = throttle) or right (CCW = throttle) lever setup    
 - USB "HID compliant" serial communication  
 - 8 bit brake + throttle output regardless of motion constraints or hardware type       
 
@@ -50,10 +54,10 @@ zip ~/Downloads/ArduinoJoystickLibrary/Joystick .
 # Or if Arduino is installed at $HOME, something along the lines of:
 cp -rf Joystick ~/Arduino/libraries 
 
-cd momo
+cd momo/utb
 
-# edit the main.h (pinout, logging, etc):
-nano main.h
+# edit the config.h (pinout, logging, etc):
+nano config.h
 
 # compile and upload from your shell
 # (alternatively your can use the Arduino IDE uploader)

@@ -4,5 +4,7 @@ venv
 cmake-build-debug
 cad
 bin
+*.bin
 extra
 archive
+*.zip
