@@ -20,10 +20,10 @@ int ledL = 11;  // lever direction is Left LED
 int ledR = 12;  // lever direction is Right LED
 
 // use Serial monitor?
-bool logs = true;
+bool logs = false;
 
 // resting position variance in encoder steps:
-int variance = 22;
+float variance = 22;
 
 // multiplier for encoder value- larger value == more sensitive
 float mx = 1.6;

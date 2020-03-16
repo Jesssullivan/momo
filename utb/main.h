@@ -27,69 +27,30 @@ Joystick_ Joystick;
 // initialize encoder pins:
 Encoder enc(encA, encB);
 
-// timers:
-long time_a = millis();
-long time_btn = millis();
-
 // serial logging:
 void lprint(String text) {
-    if (logs & time_a - millis() >= T_lprint) {
+    if (logs) {
         Serial.print(text + '\n');
-        time_a = millis();
+    }
+    else {
+        return;
     }
 }
 
 // read encoder, reverse if needed:
 bool readLR() {
-    if (time_btn - millis() >= 5) {
-        if (digitalRead(buttonLR)) {
-            lprint('switchLR pressed! \n' + 'isLeft value = ' + String(isLeft));
-            // reassign leds.  todo drink coffee --> this should be ternary!
-            if (digitalRead(ledL) == LOW) {
-                digitalWrite(ledL, HIGH);
-                digitalWrite(ledR, LOW);
-            } else {
-                digitalWrite(ledL, LOW);
-                digitalWrite(ledR, HIGH);
-            }
-            // update button timer:
-            time_btn = millis();
-            // new isLeft value is to be assigned to itself... todo is this way too obtuse
-            return !isLeft;
+    if (digitalRead(buttonLR)) {
+        lprint('switchLR pressed! \n' + 'isLeft value = ' + String(isLeft));
+        // reassign leds.  todo drink coffee --> this should be ternary!
+        if (digitalRead(ledL) == LOW) {
+            digitalWrite(ledL, HIGH);
+            digitalWrite(ledR, LOW);
+        } else {
+            digitalWrite(ledL, LOW);
+            digitalWrite(ledR, HIGH);
         }
-    }
-}
-
-// actions when in resting position:
-void resting() {
-    lprint("Resting... \n");
-    Joystick.setThrottle(0);
-    Joystick.setYAxis(0);
-}
-
-// actions for throttle:
-void throttle(float absRead) {
-    if (!(absRead * mx) >= 256) {
-        lprint("Throttle = " + String(encRead) + "\n");
-        Joystick.setThrottle(encRead);
-        return;
-    }
-    else {
-        lprint("Throttle = 256 \n");
-        Joystick.setThrottle(256);
-    }
-}
-
-// actions for brake:
-void brake(float absRead) {
-    if (!(absRead * mx) >= 256) {
-        lprint("Brake = " + String(encRead) + "\n");
-        Joystick.setYAxis(encRead);
-        return;
-    }
-    else {
-        lprint("Brake = 256 \n");
-        Joystick.setYAxis(256);
+        // new isLeft value is to be assigned to itself... todo is this way too obtuse
+        return !isLeft;
     }
 }
 
@@ -98,8 +59,8 @@ void brake(float absRead) {
 
 void setup() {
     // setup pins:
-    pinMode(encA, INPUT); // not using built in pullup resistors
-    pinMode(encB, INPUT); // not using built in pullup resistors
+    pinMode(encA, INPUT_PULLUP);
+    pinMode(encB, INPUT_PULLUP);
     pinMode(buttonLR, INPUT);  // switchs lever facing left or right to driver
     pinMode(ledL, OUTPUT);
     pinMode(ledR, OUTPUT);
@@ -107,29 +68,51 @@ void setup() {
     digitalWrite(ledR, HIGH); // default lever facing right
     // starting L/R lever value:
     isLeft = true;
-    Joystick.begin();
-    Serial.begin(9600);
+    if (logs) {
+        Serial.begin(9600);
+    }
+    else {
+        Joystick.begin();
+    }
 }
 
+//Joystick_ Joystick;
+long cuRead  = -999;
+
 void loop() {
+
     // read encoder:
+    long encRead;
     encRead = enc.read();
 
     // get absolute encoder value:
-    absRead = encRead < 0 ? -encRead : encRead;
+    long absRead = encRead < 0 ? -encRead : encRead;
 
-    // check if L/R has to be switched:
-    isLeft = readLR();
-    if (isLeft) {
-        encRead = -encRead;
-    }
-    if (!absRead <= variance) {
-        if (encRead >= 0) {
-            throttle(absRead);
-        } else {
-            brake(absRead);
+    if (absRead != cuRead) {
+        //lprint("val = " + String(absRead) + "\n");
+        if (absRead >= 22) {
+            if (encRead >= 0) {
+                if (absRead * mx <= 256) {
+                    lprint("Throttle = " + String(absRead));
+                    Joystick.setThrottle(absRead);
+                }
+                else if (absRead * mx > 256) {
+                    lprint("Throttle = 256 \n");
+                    Joystick.setThrottle(256);
+                }
+            }
+            else if (encRead < 0) {
+                if (absRead * mx <= 256) {
+                    lprint("Brake = " + String(absRead));
+                    Joystick.setYAxis(absRead);
+                }
+                else if (absRead * mx > 256) {
+                    lprint("Brake = 256");
+                    Joystick.setYAxis(256);
+                }
+            }
         }
-    } else {
-        resting();
+        cuRead = absRead;
     }
 }
+
