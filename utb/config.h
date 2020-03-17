@@ -13,14 +13,14 @@
 //////////////////////////////////////////////////////////////////////////
 
 // pinout:
-int encA = 8;  // encoder's phase 1
-int encB = 9;  // encoder's phase 2
-int buttonLR = 10;  // momentary switch toggles lever orientation, reverses throttle / brake
+int encA = 9;  // encoder's phase 1
+int encB = 10;  // encoder's phase 2
+int buttonLR = 8;  // momentary switch toggles lever orientation, reverses throttle / brake
 int ledL = 11;  // lever direction is Left LED
 int ledR = 12;  // lever direction is Right LED
 
 // use Serial monitor?
-bool logs = false;
+bool logs = true;
 
 // resting position variance in encoder steps:
 float variance = 22;
@@ -28,6 +28,6 @@ float variance = 22;
 // multiplier for encoder value- larger value == more sensitive
 float mx = 1.6;
 
-// timers:
-int T_lprint = 750; // logging frequency in ms
-int T_btn = 4;  // button sensitivity
+// sensitivity via timers:
+long T_lprint = 150; // logging frequency in ms
+long T_btn = 1000;  // button sensitivity in ms
