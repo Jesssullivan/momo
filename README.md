@@ -7,12 +7,17 @@
 <br>
 
 [***Jump to Quickstart Instructions***](#quickstart)  
-[***Link- demo CAD files w/ Fusion 360***](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9685adc521b7499dd97) <br>
 [***Jump to all designs***](#drawings)
 [*Jump to additional notes*](#notes)
+
+
+
+[![Hmmm](http://img.youtube.com/vi/Bt2yWvXx7MU/0.jpg)](https://www.youtube.com/watch?v=Bt2yWvXx7MU "Um...")
+
+
 <br>
 
-For more introductions and notes on Open Source collaboration with the D&M Makerspace, visit:       
+For more introductions to Open Source collaboration with the D&M Makerspace, visit:       
 - [Some {development} software notes here](https://github.com/PSU-HC/home-wiki/wiki/Developer-Student-Software)
 - [Some {rapid fabrication} software notes here](https://github.com/PSU-HC/home-wiki/wiki/CAD-CAM-Student-Software)
 - [...Or the D&M Makerspace Home Page over here](https://makerspace.plymouthcreate.net/)
@@ -70,7 +75,7 @@ arduino --upload utb.ino
     
 <h4 id="drawings"> </h4>     
 
-***Hardware Source Links (Fusion 360):***
+***Archived Hardware Source Links (Fusion 360):***
 
 <br>
  
