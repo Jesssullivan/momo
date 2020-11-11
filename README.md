@@ -30,9 +30,6 @@
 
 [![Hmmm](http://img.youtube.com/vi/Bt2yWvXx7MU/0.jpg)](https://www.youtube.com/watch?v=Bt2yWvXx7MU "Um...")
 
-![](https://i2.wp.com/transscendsurvival.org/wp-content/uploads/2020/04/Screenshot-from-2020-02-24-11-51-12-1.png?resize=676%2C437&ssl=1)
-
-
 <br>
 
 For more introductions to Open Source collaboration with the D&M Makerspace, visit:       
