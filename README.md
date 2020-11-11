@@ -1,18 +1,36 @@
-# 
-
-<br>
-        
-*a WIP by for the D&M Makerspace @ https://github.com/jesssullivan*
-        
-<br>
+## *a WIP by Jess @ the D&M Makerspace.*
+         
+     
 
 [***Jump to Quickstart Instructions***](#quickstart)  
-[***Jump to all designs***](#drawings)
-[*Jump to additional notes*](#notes)
+[***Jump to all designs***](#drawings)   
+[***Jump to additional notes***](#notes)  
 
 
+  
+<h4 id="drawings"> </h4>     
+
+***Iterations of Hardware- Source Links (Fusion 360):***
+
+<br>
+ 
+- [22.2 Reversed Mount Digital](https://a360.co/32xEzMR) 
+- [(archived 22.2 Enclosed Digital)](https://a360.co/2PidrMl)
+- [alt. Shelled 22.2 Reversed Mount Digital](https://a360.co/2VeH4Sv)
+- [22.2mm Shelled Digital Limited](https://a360.co/39VZawA)
+- [22.2 Digital + powered feedback (WIP)](https://a360.co/2P3snh5)
+- [alt, previous 22.2mm Digital Limited](https://a360.co/2vDDMxk)
+- [Digital, single limit](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd968133e296ee005ddd1)
+- [Digital, bolt limited](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9682a1ff9148d0f03e5)
+- [Analog, bolt limited](https://a360.co/2Rb2a1w)
+- [Analog, variable limits](https://a360.co/30D7Ft9)
+
+<br>
+<br>
 
 [![Hmmm](http://img.youtube.com/vi/Bt2yWvXx7MU/0.jpg)](https://www.youtube.com/watch?v=Bt2yWvXx7MU "Um...")
+
+![](https://i2.wp.com/transscendsurvival.org/wp-content/uploads/2020/04/Screenshot-from-2020-02-24-11-51-12-1.png?resize=676%2C437&ssl=1)
 
 
 <br>
@@ -72,26 +90,6 @@ arduino --upload utb.ino
 # git checkout testing
 # :)
 ```
-    
-<h4 id="drawings"> </h4>     
-
-***Archived Hardware Source Links (Fusion 360):***
-
-<br>
- 
-- ***[22.2 Reversed Mount Digital](https://a360.co/32xEzMR)***
-- [(archived 22.2 Enclosed Digital)](https://a360.co/2PidrMl)
-- [alt. Shelled 22.2 Reversed Mount Digital](https://a360.co/2VeH4Sv)
-- [22.2mm Shelled Digital Limited](https://a360.co/39VZawA)
-- [22.2 Digital + powered feedback (WIP)](https://a360.co/2P3snh5)
-- [alt, previous 22.2mm Digital Limited](https://a360.co/2vDDMxk)
-- [Digital, single limit](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd968133e296ee005ddd1)
-- [Digital, bolt limited](https://myhub.autodesk360.com/ue2819a04/shares/public/SH56a43QTfd62c1cd9682a1ff9148d0f03e5)
-- [Analog, bolt limited](https://a360.co/2Rb2a1w)
-- [Analog, variable limits](https://a360.co/30D7Ft9)
-
-<br>
-<br>
         
         
 <h4 id="notes"> </h4>     
